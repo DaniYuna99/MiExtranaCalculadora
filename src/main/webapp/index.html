@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-9">
+<title>Calculadora </title>
+</head>
+<body>
+
+	<h1> Calculadora </h1>
+	<hr>
+	
+	<form action="calculadora.jsp">
+		
+		<p> Dime el primer numero: <input type="number" id="num1" name="num1"> </p>
+		
+		<select id="operator" name="operator"> 
+			<option value="1"> Sumar </option>
+			<option value="2"> Restar </option>
+		</select>
+		
+		<p> Dime el segundo numero: <input type="number" id="num2" name="num2"> </p>
+		
+		<input type="submit" value="Calcular">
+		<input type="reset" value="Borrar todo">
+		
+	</form>
+	
+	<form action="visualizador.jsp">
+		<input type="button" value="Visualizar operación">
+	</form>
+	
+</body>
+</html>
