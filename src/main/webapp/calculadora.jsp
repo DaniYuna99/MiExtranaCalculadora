@@ -16,26 +16,21 @@
 	<h1> Calculadora </h1>
 	<hr>
 	
-	<form action="calculadora.jsp">
+	<form action="calculadora.jsp" method="post">
 		
-		<p> Dime el primer numero: <input type="number" id="num1" name="num1"> </p>
+		<textarea id="textArea" name="textArea"> <%= cadenaVisualizadora %> </textarea>
+		
+		<p> Dime el numero: <input type="text" id="num1" name="num1"> </p>
 		
 		<select id="operator" name="operator"> 
-			<option value="1"> Sumar </option>
-			<option value="2"> Restar </option>
+			<option value="+"> Sumar </option>
+			<option value="-"> Restar </option>
 		</select>
 		
-		<p> Dime el segundo numero: <input type="number" id="num2" name="num2"> </p>
-		
-		<br>
 		<input type="submit" value="Calcular">
 		<input type="reset" value="Borrar todo">
+		<input type="button" value="Visualizar">
 		
-	</form>
-	
-	
-	<form action="visualizador.jsp">
-		<input type="button" value="Visualizar operación">
 	</form>
 
 
@@ -43,61 +38,71 @@
 	<%
 	
 		if ((request.getParameter("num1") != null)
-				&& (request.getParameter("num2") != null)
-				&& (!request.getParameter("num1").isEmpty())
-				&& (!request.getParameter("num2").isEmpty())) {
+				&& (!request.getParameter("num1").isEmpty())) {
 			
-			double num1 = Double.valueOf(request.getParameter("num1"));
-			double num2 = Double.valueOf(request.getParameter("num2"));
-			int operator = Integer.valueOf(request.getParameter("operator"));
+			num1 = request.getParameter("num1");
+			operator = request.getParameter("operator");
+			cadenaVisualizadora.setLength(0);
+			cadenaVisualizadora.append(num1 + " " + String.valueOf(operator));
+			
+
 
 			
-			double result = Calculadora.operar(num1, operator, num2);
+			//double result = Calculadora.operar(num1, operator, num2);
 			
-			out.println("<br> <br> <hr> El resultado de la cuenta es: " 
-						+ result + "." + "<br> <hr>");
+			//out.println("<br> <br> <hr> El resultado de la cuenta es: " 
+						//+ result + "." + "<br> <hr>");
 		
+			
+		}else if ((request.getParameter("num1") != null)
+				&& (num1.length() != 0)) {
+			
+			num2 = request.getParameter("num1");
+			cadenaVisualizadora.setLength(0);
+			cadenaVisualizadora.append(num1 + " " + String.valueOf(operator) 
+										+ " " + num2);
+			
 			
 		}else if ((request.getParameter("num1") == null)
 				|| (request.getParameter("num1").isEmpty())) {
 			
-			out.println("<br> <br> <hr> El primer número está vacío." 
+			out.println("<br> <br> <hr> El número está vacío." 
 			+ "<br> <hr>");
-		
-			
-		}else if ((request.getParameter("num2") == null) 
-				|| (request.getParameter("num2").isEmpty())) {
-			
-			out.println("<br> <br> <hr> El segundo número está vacío." 
-			+ "<br> <hr>");
-		
 		}
 	
 		
 	%>
 	
+	
+	<%!
+	
+		String num1 = "";
+		String operator = "";
+		String num2 = "";
+		StringBuilder cadenaVisualizadora = new StringBuilder();
+
+	%>
 
 	
-	<%! 
-	
-		public String visualizar (double num1, int operator, double num2) {
+	<%
+
+		//String num1 = "-1";
+		/*int operator = Integer.valueOf(request.getParameter("operator"));
 		
-			StringBuilder sb = new StringBuilder();
-			
-			
-			if (num2 == -1) {
-				sb.append(String.valueOf(num1) + String.valueOf(operator));
-			
-			}else if ((num1 != -1) && (num2 != -1)) {
-				sb.append(String.valueOf(num1) + String.valueOf(operator) 
-					+ String.valueOf(num2));
+		
+		if (!request.getParameter("num1").isEmpty()) {
+			num1 = request.getParameter("num1");
+		}*/
+		
+		
 
-			}
-			
-			
-			return (sb.toString());
-		}
+		
+		//out.println(Calculadora.visualizar(num1, operator, num2));
+		//out.println(num1);
+		//out.println(num2);
+		//out.println(operator);
 
+	
 	%>
 	
 	
