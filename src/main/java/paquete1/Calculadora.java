@@ -18,40 +18,60 @@ public class Calculadora {
 	
 	
 	//Métodos
-	public static double operar (String num1, int operator, String num2) {
+	
+	/**
+	 * Este método calcula la suma o la resta de dos números que les 
+	 * pases por parámetro, y para determinar la operación a realizar, 
+	 * hay que pasarle un signo de suma (+) o resta (-) como parámetro
+	 * String también.
+	 * 
+	 * Devuelve el resultado de la operación correspondiente.
+	 * 
+	 * @param num1
+	 * @param operator
+	 * @param num2
+	 * @return
+	 */
+	public static double operar (String num1, String operator, String num2) {
 		
 		double result = 0;
 		
-		if (operator == 1) {
+		if (operator.equals("+")) {
 			result = Double.valueOf(num1) + Double.valueOf(num2);
 		
-		}else if (operator == 2) {
+		}else if (operator.equals("-")) {
 			result = Double.valueOf(num1) - Double.valueOf(num2);
 		}
 		
 		
 		return (result);
 	}
-
 	
 	
-	public static String visualizar (String num1, int operator, String num2) {
+	
+	/**
+	 * Este método comprueba si un número en una variable String
+	 * es realmente un número, y que no posea caracteres no válidos.
+	 * */
+	public static boolean esUnNumero (String num) {
 		
-		StringBuilder sb = new StringBuilder();
+		boolean tieneLetra = true;
+		String caracteresNoPermitidos = "[]-_:,Ç;?'!@·#$~%&¬/()=+*";
+		
+		
+		for (int i = 0; i < num.length(); i++) {
 			
-			
-		if (Integer.valueOf(num2) == -1) {
-			sb.append(String.valueOf(num1) + String.valueOf(operator));
-			
-		}else if ((Integer.valueOf(num1) != -1) 
-				&& (Integer.valueOf(num2) != -1)) {
-			sb.append(String.valueOf(num1) + String.valueOf(operator) 
-				+ String.valueOf(num2));
-
+			for (int j = 0; j < caracteresNoPermitidos.length(); j++) {
+				
+				if (Character.isAlphabetic(num.charAt(i)) 
+						|| (caracteresNoPermitidos.charAt(j) == num.charAt(i))) {
+					tieneLetra = false;
+				}
+			}
 		}
-			
-			
-		return (sb.toString());
+		
+		
+		return (tieneLetra);
 	}
 	
 	

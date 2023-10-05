@@ -11,7 +11,9 @@
 	
 	<form action="calculadora.jsp" method="post">
 		
-		<textarea id="textArea" name="textArea"> </textarea>
+		<textarea id="textArea" name="textArea" cols="60" 
+					style="resize: none;" readonly> 
+		</textarea>
 		
 		<p> Dime el numero: <input type="text" id="num1" name="num1"> </p>
 		
@@ -20,9 +22,9 @@
 			<option value="-"> Restar </option>
 		</select>
 		
-		<input type="submit" value="Calcular">
-		<input type="reset" value="Borrar todo">
-		<input type="button" value="Visualizar">
+		<input type="submit" name="submit" value="Calcular">
+		<input type="reset" name="reset" value="Borrar todo">
+		<input type="button" name="visualizar" value="Visualizar">
 		
 	</form>
 	
