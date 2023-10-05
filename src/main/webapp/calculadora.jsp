@@ -39,19 +39,40 @@
 	</form>
 
 
+	<!-- COSAS QUE LE FALTAN:
+		
+		- El botón de Visualizar no funciona porque no tenía ni idea
+		
+		- El botón de Borrar todo no funciona porque no tenía ni idea
+		
+		- El botón de Calcular funciona y lo muestra en el textarea, pero
+		hay que presionarlo varias veces, y la operación se registra junto 
+		al primer número que introduzcas. Lo de mostrar también es algo 
+		inconsistente.
+		
+		- No muestra que hay errores en la operación.
+		
+		- Las variables usadas son globales, y no se debe hacer así, lo 
+		supe tarde.
+		
+	-->
+
 	<%!
 	
+		/*Variables de la página*/
 		String num1 = "";
 		String operator = "";
 		String num2 = "";
 		boolean estaElResultado = false;
 		StringBuilder cadenaVisualizadora = new StringBuilder();
-
+		
 	%>
 
 
 	<%
 	
+		/*Este if recoge el primer número al comprobar si el número es 
+		un número*/
 		if ((request.getParameter("num1") != null)
 				&& (!request.getParameter("num1").isEmpty())
 				&& (num1.length() == 0)
@@ -62,7 +83,10 @@
 			cadenaVisualizadora.setLength(0);
 			cadenaVisualizadora.append(num1 + " " + String.valueOf(operator));
 			
-			
+		
+		/*Este if te recoge el segundo número después de comprobar si 
+		es un número de verdad, y actualiza el visualizador cuando 
+		has puesto los dos números*/
 		}else if ((request.getParameter("num1") != null)
 				&& (!request.getParameter("num1").isEmpty())
 				&& (num1.length() != 0) && (num2.length() == 0)
@@ -72,10 +96,11 @@
 			cadenaVisualizadora.setLength(0);
 			cadenaVisualizadora.append(num1 + " " + String.valueOf(operator) 
 										+ " " + num2);
+		
 			
-			
+		/*Este if te lanza un mensaje cuando está el resultado*/	
 		}else if ((num1.length() != 0)
-				&& ((num2.length() != 0))) {
+				&& ((num2.length() != 0)) && (estaElResultado == true)) {
 			
 			out.println("<br> <br> <hr> Si quieres introducir un "
 			+ "número nuevo, pulsa Calcular para borrar, y escribe la cuenta de nuevo." 
@@ -90,7 +115,9 @@
 			cadenaVisualizadora.append(" = " + Calculadora.operar(num1, operator, num2));
 			estaElResultado = true;
 		
-			
+		
+		//Este if vuelve a poner las variables vacías cuando detecta
+		//que se ha mostrado el resultado
 		}else if ((estaElResultado == true) && (num1.length() != 0)
 				&& (num2.length() != 0)) {
 			cadenaVisualizadora.setLength(0);
