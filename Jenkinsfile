@@ -115,7 +115,7 @@ node {
     }
 
     stage('Maven build') {
-        buildInfo = rtMaven.run pom: 'maven-example/pom.xml', goals: 'clean install'
+        buildInfo = rtMaven.run pom: 'MiExtranaCalculadora/pom.xml', goals: 'clean install'
     }
 
     stage('Publish build info') {
